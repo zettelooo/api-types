@@ -1,36 +1,4 @@
-import { Model } from '../../Model'
-
-export namespace Extension {
-  export type Request<T extends Request.Type = Request.Type> = {
-    [Request.Type.Start]: {
-      readonly type: Request.Type.Start
-      readonly appAccessKey: string
-    }
-  }[T]
-
-  export namespace Request {
-    export enum Type {
-      Start = 'START',
-    }
-  }
-
-  export type Response<T extends Response.Type = Response.Type> = {
-    [Response.Type.Started]: {
-      readonly type: Response.Type.Started
-    }
-    [Response.Type.Mutation]: {
-      readonly type: Response.Type.Mutation
-      readonly entity: Model.Entity.User | Model.Entity.Page | Model.Entity.PageMember | Model.Entity.Card
-    }
-  }[T]
-
-  export namespace Response {
-    export enum Type {
-      Started = 'STARTED',
-      Mutation = 'MUTATION',
-    }
-  }
-}
+import { Entity } from '../../Entity'
 
 export type Request<T extends Request.Type = Request.Type> = {
   [Request.Type.Start]: {
@@ -85,13 +53,28 @@ export type Response<T extends Response.Type = Response.Type> = {
   }
   [Response.Type.Mutation]: {
     readonly type: Response.Type.Mutation
-    readonly entity:
-      | Model.Entity.Account
-      | Model.Entity.User
-      | Model.Entity.Page
-      | Model.Entity.PageMember
-      | Model.Entity.Card
-  }
+  } & (
+    | {
+        readonly newEntity: Entity.Account
+        readonly oldEntity?: Entity.Account
+      }
+    | {
+        readonly newEntity: Entity.User
+        readonly oldEntity?: Entity.User
+      }
+    | {
+        readonly newEntity: Entity.Page
+        readonly oldEntity?: Entity.Page
+      }
+    | {
+        readonly newEntity: Entity.PageMember
+        readonly oldEntity?: Entity.PageMember
+      }
+    | {
+        readonly newEntity: Entity.Card
+        readonly oldEntity?: Entity.Card
+      }
+  )
 }[T]
 
 export namespace Response {

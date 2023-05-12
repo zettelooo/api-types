@@ -1,4 +1,4 @@
-import { Model } from '../../Model'
+import { Entity } from '../../Entity'
 import { PageEntityForExtension } from './types'
 
 export namespace GetUpdates {
@@ -21,8 +21,24 @@ export namespace GetUpdates {
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation
-      readonly entity: Model.Entity.User | PageEntityForExtension<D> | Model.Entity.PageMember | Model.Entity.Card
-    }
+    } & (
+      | {
+          readonly newEntity: Entity.User
+          readonly oldEntity?: Entity.User
+        }
+      | {
+          readonly newEntity: PageEntityForExtension<D>
+          readonly oldEntity?: PageEntityForExtension<D>
+        }
+      | {
+          readonly newEntity: Entity.PageMember
+          readonly oldEntity?: Entity.PageMember
+        }
+      | {
+          readonly newEntity: Entity.Card
+          readonly oldEntity?: Entity.Card
+        }
+    )
   }[T]
 
   export namespace Response {

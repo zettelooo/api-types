@@ -1,3 +1,4 @@
+import { Entity } from '../../Entity'
 import { Model } from '../../Model'
 import { PageEntityForExtension } from './types'
 
@@ -6,7 +7,7 @@ export namespace GetUsers {
     readonly ids: readonly string[]
   }
   export interface Response {
-    readonly users: readonly Model.Entity.User[]
+    readonly users: readonly Entity.User[]
   }
 }
 
@@ -26,7 +27,7 @@ export namespace GetPageMembers {
     readonly pageIds?: readonly string[]
   }
   export interface Response {
-    readonly pageMembers: readonly Model.Entity.PageMember[]
+    readonly pageMembers: readonly Entity.PageMember[]
   }
 }
 
@@ -36,11 +37,11 @@ export namespace GetCards {
     readonly pageIds?: readonly string[]
   }
   export interface Response {
-    readonly cards: readonly Model.Entity.Card[]
+    readonly cards: readonly Entity.Card[]
   }
 }
 
-export namespace SetPageExtensionManagedData {
+export namespace SetPageExtensionData {
   export interface Request {
     readonly pageId: string
     readonly data?: any

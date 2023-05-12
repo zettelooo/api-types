@@ -1,95 +1,5 @@
+import { Entity } from '../../Entity'
 import { Model } from '../../Model'
-
-export namespace Extension {
-  export namespace GetUsers {
-    export interface Request {
-      readonly ids: readonly string[]
-    }
-    export interface Response {
-      readonly users: readonly Model.User[]
-    }
-  }
-
-  export namespace GetPages {
-    export interface Request {
-      readonly ids?: readonly string[]
-      readonly withExtensionInstalled?: boolean
-    }
-    export interface Response {
-      readonly pages: readonly PageForExtension[]
-    }
-  }
-
-  export namespace GetPageMembers {
-    export interface Request {
-      readonly userIds?: readonly string[]
-      readonly pageIds?: readonly string[]
-    }
-    export interface Response {
-      readonly pageMembers: readonly Model.PageMember[]
-    }
-  }
-
-  export namespace GetCards {
-    export interface Request {
-      readonly ids?: readonly string[]
-      readonly pageIds?: readonly string[]
-    }
-    export interface Response {
-      readonly cards: readonly Model.Card[]
-    }
-  }
-
-  export namespace SetPageExtensionManagedData {
-    export interface Request {
-      readonly pageId: string
-      readonly data?: any
-    }
-    export interface Response {}
-  }
-
-  export namespace AddCard {
-    export interface Request {
-      readonly card: Readonly<
-        Pick<Model.Card, 'ownerId' | 'pageId'> &
-          Partial<Pick<Model.Card, 'color' | 'sequence'>> &
-          (Pick<Model.Card, 'blocks'> | { readonly text: string })
-      >
-    }
-    export interface Response {
-      readonly cardId: string
-    }
-  }
-
-  export namespace EditCard {
-    export interface Request {
-      readonly id: string
-      readonly updates: Readonly<
-        Partial<
-          Pick<Model.Card, 'catalystUserId' | 'pageId' | 'color' | 'sequence'> &
-            (Pick<Model.Card, 'blocks'> | { readonly text: string })
-        >
-      >
-    }
-    export interface Response {}
-  }
-
-  export namespace AddBadge {
-    export interface Request {
-      readonly badge: {
-        readonly userId: string
-        // For now only this badge action type is needed, we may improve this later:
-        readonly mentionInCard: {
-          readonly userId: string
-          readonly cardId: string
-        }
-      }
-    }
-    export interface Response {}
-  }
-
-  export type PageForExtension = Omit<Model.Page, 'extensionManagedData'> & { readonly extensionManagedData: any }
-}
 
 export namespace Utilities {
   export namespace Ids {
@@ -204,7 +114,7 @@ export namespace Account {
   /** Authenticated with `Access-Token` or `API-Key`. */
   export namespace Get {
     export interface ResponseBody {
-      readonly account: Model.Entity.Account
+      readonly account: Entity.Account
     }
   }
 
@@ -224,7 +134,7 @@ export namespace Users {
         readonly userId: string
       }
       export interface ResponseBody {
-        readonly user: Model.Entity.User
+        readonly user: Entity.User
       }
     }
   }
@@ -238,7 +148,7 @@ export namespace Users {
         readonly limit?: number
       }
       export interface ResponseBody {
-        readonly users: readonly Model.Entity.User[]
+        readonly users: readonly Entity.User[]
       }
     }
   }
@@ -248,7 +158,7 @@ export namespace Pages {
   /** Authenticated with `Access-Token` or `API-Key`. */
   export namespace Get {
     export interface ResponseBody {
-      readonly pages: readonly Model.Entity.Page[]
+      readonly pages: readonly Entity.Page[]
     }
   }
 
@@ -274,8 +184,8 @@ export namespace Pages {
         readonly pageId: string
       }
       export interface ResponseBody {
-        readonly page: Model.Entity.Page
-        readonly membership: Model.Entity.PageMember
+        readonly page: Entity.Page
+        readonly membership: Entity.PageMember
       }
     }
 
@@ -309,7 +219,7 @@ export namespace PageMembers {
       readonly page_id: string
     }
     export interface ResponseBody {
-      readonly pageMembers: readonly Model.Entity.PageMember[]
+      readonly pageMembers: readonly Entity.PageMember[]
     }
   }
 
@@ -332,7 +242,7 @@ export namespace PageMembers {
         readonly pageMemberId: string
       }
       export interface ResponseBody {
-        readonly pageMember: Model.Entity.PageMember
+        readonly pageMember: Entity.PageMember
       }
     }
 
@@ -364,7 +274,7 @@ export namespace Cards {
       readonly limit?: number
     }
     export interface ResponseBody {
-      readonly cards: readonly Model.Entity.Card[]
+      readonly cards: readonly Entity.Card[]
     }
   }
 
@@ -388,7 +298,7 @@ export namespace Cards {
         readonly cardId: string
       }
       export interface ResponseBody {
-        readonly card: Model.Entity.Card
+        readonly card: Entity.Card
       }
     }
 
@@ -419,7 +329,7 @@ export namespace PublicPages {
         readonly publicPageId: string
       }
       export interface ResponseBody {
-        readonly publicPage: Model.Entity.Page
+        readonly publicPage: Entity.Page
       }
     }
 
@@ -434,7 +344,7 @@ export namespace PublicPages {
           readonly limit?: number
         }
         export interface ResponseBody {
-          readonly cards: readonly Model.Entity.Card[]
+          readonly cards: readonly Entity.Card[]
         }
       }
 
@@ -446,7 +356,7 @@ export namespace PublicPages {
             readonly cardId: string
           }
           export interface ResponseBody {
-            readonly card: Model.Entity.Card
+            readonly card: Entity.Card
           }
         }
       }
