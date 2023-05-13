@@ -46,13 +46,13 @@ export namespace GetUpdates {
           readonly type: 'page member'
           readonly newPageMember: Entity.PageMember
           readonly oldPageMember?: Entity.PageMember
-          readonly page: Entity.Page
+          readonly page: PageEntityForExtension<D>
         }
       | {
           readonly type: 'card'
           readonly newCard: Entity.Card
           readonly oldCard?: Entity.Card
-          readonly page: Entity.Page
+          readonly page: PageEntityForExtension<D>
         }
   }
 }
