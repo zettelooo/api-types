@@ -1,4 +1,6 @@
 import { Entity } from '../../Entity'
+import { Model } from '../../Model'
+import { Mutation } from '../Mutation'
 
 export type Request<T extends Request.Type = Request.Type> = {
   [Request.Type.Start]: {
@@ -53,28 +55,13 @@ export type Response<T extends Response.Type = Response.Type> = {
   }
   [Response.Type.Mutation]: {
     readonly type: Response.Type.Mutation
-  } & (
-    | {
-        readonly newEntity: Entity.Account
-        readonly oldEntity?: Entity.Account
-      }
-    | {
-        readonly newEntity: Entity.User
-        readonly oldEntity?: Entity.User
-      }
-    | {
-        readonly newEntity: Entity.Page
-        readonly oldEntity?: Entity.Page
-      }
-    | {
-        readonly newEntity: Entity.PageMember
-        readonly oldEntity?: Entity.PageMember
-      }
-    | {
-        readonly newEntity: Entity.Card
-        readonly oldEntity?: Entity.Card
-      }
-  )
+    readonly mutation:
+      | Mutation<Model.Type.Account, Entity.Account>
+      | Mutation<Model.Type.User, Entity.User>
+      | Mutation<Model.Type.Page, Entity.Page>
+      | Mutation<Model.Type.PageMember, Entity.PageMember>
+      | Mutation<Model.Type.Card, Entity.Card>
+  }
 }[T]
 
 export namespace Response {
