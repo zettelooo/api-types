@@ -36,5 +36,7 @@ export namespace GetUpdates {
       Started = 'STARTED',
       Mutation = 'MUTATION',
     }
+
+    export type Mutation = Response<Type.Mutation>['mutation']
   }
 }

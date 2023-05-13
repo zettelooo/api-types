@@ -70,6 +70,8 @@ export namespace Response {
     Subscriptions = 'SUBSCRIPTIONS',
     Mutation = 'MUTATION',
   }
+
+  export type Mutation = Response<Type.Mutation>['mutation']
 }
 
 export interface Subscriptions {
