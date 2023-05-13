@@ -1,6 +1,4 @@
 import { Entity } from '../../Entity'
-import { Model } from '../../Model'
-import { Mutation } from '../Mutation'
 
 export type Request<T extends Request.Type = Request.Type> = {
   [Request.Type.Start]: {
@@ -55,12 +53,7 @@ export type Response<T extends Response.Type = Response.Type> = {
   }
   [Response.Type.Mutation]: {
     readonly type: Response.Type.Mutation
-    readonly mutation:
-      | Mutation<Model.Type.Account, Entity.Account>
-      | Mutation<Model.Type.User, Entity.User>
-      | Mutation<Model.Type.Page, Entity.Page>
-      | Mutation<Model.Type.PageMember, Entity.PageMember>
-      | Mutation<Model.Type.Card, Entity.Card>
+    readonly mutation: Response.Mutation
   }
 }[T]
 
@@ -71,7 +64,32 @@ export namespace Response {
     Mutation = 'MUTATION',
   }
 
-  export type Mutation = Response<Type.Mutation>['mutation']
+  export type Mutation =
+    | {
+        readonly type: 'account'
+        readonly newAccount: Entity.Account
+        readonly oldAccount?: Entity.Account
+      }
+    | {
+        readonly type: 'user'
+        readonly newUser: Entity.User
+        readonly oldUser?: Entity.User
+      }
+    | {
+        readonly type: 'page'
+        readonly newPage: Entity.Page
+        readonly oldPage?: Entity.Page
+      }
+    | {
+        readonly type: 'page member'
+        readonly newPageMember: Entity.PageMember
+        readonly oldPageMember?: Entity.PageMember
+      }
+    | {
+        readonly type: 'card'
+        readonly newCard: Entity.Card
+        readonly oldCard?: Entity.Card
+      }
 }
 
 export interface Subscriptions {
