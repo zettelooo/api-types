@@ -1,5 +1,5 @@
 import { Entity } from '../../Entity'
-import { PageEntityForExtension } from './types'
+import { CardEntityForExtension, PageEntityForExtension } from './types'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {
@@ -15,13 +15,13 @@ export namespace GetUpdates {
     }
   }
 
-  export type Response<T extends Response.Type = Response.Type, D = any> = {
+  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any> = {
     [Response.Type.Started]: {
       readonly type: Response.Type.Started
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation
-      readonly mutation: Response.Mutation<D>
+      readonly mutation: Response.Mutation<PD, CD>
     }
   }[T]
 
@@ -31,7 +31,7 @@ export namespace GetUpdates {
       Mutation = 'MUTATION',
     }
 
-    export type Mutation<D = any> =
+    export type Mutation<PD = any, CD = any> =
       | {
           readonly type: 'user'
           readonly newUser: Entity.User
@@ -39,20 +39,20 @@ export namespace GetUpdates {
         }
       | {
           readonly type: 'page'
-          readonly newPage: PageEntityForExtension<D>
-          readonly oldPage?: PageEntityForExtension<D>
+          readonly newPage: PageEntityForExtension<PD>
+          readonly oldPage?: PageEntityForExtension<PD>
         }
       | {
           readonly type: 'page member'
           readonly newPageMember: Entity.PageMember
           readonly oldPageMember?: Entity.PageMember
-          readonly page: PageEntityForExtension<D>
+          readonly page: PageEntityForExtension<PD>
         }
       | {
           readonly type: 'card'
-          readonly newCard: Entity.Card
-          readonly oldCard?: Entity.Card
-          readonly page: PageEntityForExtension<D>
+          readonly newCard: CardEntityForExtension<CD>
+          readonly oldCard?: CardEntityForExtension<CD>
+          readonly page: PageEntityForExtension<PD>
         }
   }
 }

@@ -1,6 +1,6 @@
 import { Entity } from '../../Entity'
 import { Model } from '../../Model'
-import { PageEntityForExtension } from './types'
+import { CardEntityForExtension, PageEntityForExtension } from './types'
 
 export namespace GetUsers {
   export interface Request {
@@ -37,7 +37,7 @@ export namespace GetCards {
     readonly pageIds?: readonly string[]
   }
   export interface Response {
-    readonly cards: readonly Entity.Card[]
+    readonly cards: readonly CardEntityForExtension[]
   }
 }
 
@@ -49,12 +49,20 @@ export namespace SetPageExtensionData {
   export interface Response {}
 }
 
+export namespace SetCardExtensionData {
+  export interface Request {
+    readonly cardId: string
+    readonly data?: any
+  }
+  export interface Response {}
+}
+
 export namespace AddCard {
   export interface Request {
     readonly card: Readonly<
-      Pick<Model.Card, 'ownerId' | 'pageId'> &
-        Partial<Pick<Model.Card, 'color' | 'sequence'>> &
-        (Pick<Model.Card, 'blocks'> | { readonly text: string })
+      Pick<CardEntityForExtension, 'ownerId' | 'pageId'> &
+        Partial<Pick<CardEntityForExtension, 'color' | 'sequence' | 'extensionData'>> &
+        (Pick<CardEntityForExtension, 'blocks'> | { readonly text: string })
     >
   }
   export interface Response {
@@ -67,8 +75,8 @@ export namespace EditCard {
     readonly id: string
     readonly updates: Readonly<
       Partial<
-        Pick<Model.Card, 'catalystUserId' | 'pageId' | 'color' | 'sequence'> &
-          (Pick<Model.Card, 'blocks'> | { readonly text: string })
+        Pick<CardEntityForExtension, 'catalystUserId' | 'pageId' | 'color' | 'sequence' | 'extensionData'> &
+          (Pick<CardEntityForExtension, 'blocks'> | { readonly text: string })
       >
     >
   }
