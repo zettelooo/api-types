@@ -63,7 +63,13 @@ export namespace AddPage {
         Partial<
           Pick<
             PageEntityForExtension<D>,
-            'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'public' | 'extensionData'
+            | 'description'
+            | 'iconEmoji'
+            | 'color'
+            | 'avatarFileId'
+            | 'public'
+            | 'hasExtensionInstalled'
+            | 'extensionData'
           >
         >
     >
@@ -87,6 +93,7 @@ export namespace EditPage {
           | 'color'
           | 'avatarFileId'
           | 'public'
+          | 'hasExtensionInstalled'
           | 'extensionData'
         >
       >
