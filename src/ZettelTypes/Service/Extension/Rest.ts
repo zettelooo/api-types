@@ -1,5 +1,4 @@
 import { Entity } from '../../Entity'
-import { Model } from '../../Model'
 import { CardEntityForExtension, PageEntityForExtension } from './types'
 
 export namespace GetUsers {
@@ -36,33 +35,33 @@ export namespace GetCards {
     readonly ids?: readonly string[]
     readonly pageIds?: readonly string[]
   }
-  export interface Response {
-    readonly cards: readonly CardEntityForExtension[]
+  export interface Response<D = any> {
+    readonly cards: readonly CardEntityForExtension<D>[]
   }
 }
 
 export namespace SetPageExtensionData {
-  export interface Request {
+  export interface Request<D = any> {
     readonly pageId: string
-    readonly data?: any
+    readonly data?: D
   }
   export interface Response {}
 }
 
 export namespace SetCardExtensionData {
-  export interface Request {
+  export interface Request<D = any> {
     readonly cardId: string
-    readonly data?: any
+    readonly data?: D
   }
   export interface Response {}
 }
 
 export namespace AddCard {
-  export interface Request {
+  export interface Request<D = any> {
     readonly card: Readonly<
-      Pick<CardEntityForExtension, 'ownerId' | 'pageId'> &
-        Partial<Pick<CardEntityForExtension, 'color' | 'sequence' | 'extensionData'>> &
-        (Pick<CardEntityForExtension, 'blocks'> | { readonly text: string })
+      Pick<CardEntityForExtension<D>, 'ownerId' | 'pageId'> &
+        Partial<Pick<CardEntityForExtension<D>, 'color' | 'sequence' | 'extensionData'>> &
+        (Pick<CardEntityForExtension<D>, 'blocks'> | { readonly text: string })
     >
   }
   export interface Response {
@@ -71,12 +70,12 @@ export namespace AddCard {
 }
 
 export namespace EditCard {
-  export interface Request {
+  export interface Request<D = any> {
     readonly id: string
     readonly updates: Readonly<
       Partial<
-        Pick<CardEntityForExtension, 'catalystUserId' | 'pageId' | 'color' | 'sequence' | 'extensionData'> &
-          (Pick<CardEntityForExtension, 'blocks'> | { readonly text: string })
+        Pick<CardEntityForExtension<D>, 'catalystUserId' | 'pageId' | 'color' | 'sequence' | 'extensionData'> &
+          (Pick<CardEntityForExtension<D>, 'blocks'> | { readonly text: string })
       >
     >
   }
