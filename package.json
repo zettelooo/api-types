@@ -1,7 +1,7 @@
 {
   "name": "@zettelyay/api-types",
   "description": "Zettel: Public API types",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "files": [
     "dist/**"
   ],
