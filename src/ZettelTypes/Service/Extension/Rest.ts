@@ -3,7 +3,7 @@ import { CardEntityForExtension, PageEntityForExtension } from './types'
 
 export namespace GetUsers {
   export interface Request {
-    readonly ids: readonly string[]
+    readonly userIds: readonly string[]
   }
   export interface Response {
     readonly users: readonly Entity.User[]
@@ -12,7 +12,7 @@ export namespace GetUsers {
 
 export namespace GetPages {
   export interface Request {
-    readonly ids?: readonly string[]
+    readonly pageIds?: readonly string[]
     readonly withExtensionInstalled?: boolean
   }
   export interface Response<D = any> {
@@ -32,7 +32,7 @@ export namespace GetPageMembers {
 
 export namespace GetCards {
   export interface Request {
-    readonly ids?: readonly string[]
+    readonly cardIds?: readonly string[]
     readonly pageIds?: readonly string[]
   }
   export interface Response<D = any> {
@@ -56,6 +56,45 @@ export namespace SetCardExtensionData {
   export interface Response {}
 }
 
+export namespace AddPage {
+  export interface Request<D = any> {
+    readonly page: Readonly<
+      Pick<PageEntityForExtension<D>, 'ownerId' | 'name'> &
+        Partial<
+          Pick<
+            PageEntityForExtension<D>,
+            'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'public' | 'extensionData'
+          >
+        >
+    >
+  }
+  export interface Response {
+    readonly pageId: string
+  }
+}
+
+export namespace EditPage {
+  export interface Request<D = any> {
+    readonly pageId: string
+    readonly updates: Readonly<
+      Partial<
+        Pick<
+          PageEntityForExtension<D>,
+          | 'catalystUserId'
+          | 'name'
+          | 'description'
+          | 'iconEmoji'
+          | 'color'
+          | 'avatarFileId'
+          | 'public'
+          | 'extensionData'
+        >
+      >
+    >
+  }
+  export interface Response {}
+}
+
 export namespace AddCard {
   export interface Request<D = any> {
     readonly card: Readonly<
@@ -71,7 +110,7 @@ export namespace AddCard {
 
 export namespace EditCard {
   export interface Request<D = any> {
-    readonly id: string
+    readonly cardId: string
     readonly updates: Readonly<
       Partial<
         Pick<CardEntityForExtension<D>, 'catalystUserId' | 'pageId' | 'color' | 'sequence' | 'extensionData'> &
