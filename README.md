@@ -13,7 +13,7 @@ $ npm install @zettelooo/api-types
 Clone the repository locally:
 
 ```bash
-$ git clone https://github.com/zettelooo/api-types.git
+$ git clone git@github.com:zettelooo/api-types.git
 ```
 
 Install the dependencies:
