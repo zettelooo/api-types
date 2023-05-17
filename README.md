@@ -5,7 +5,7 @@ Models and types definition for Zettel public API.
 ## Installation
 
 ```bash
-$ npm install @zettelyay/api-types
+$ npm install @zettelooo/api-types
 ```
 
 ## Development
@@ -13,7 +13,7 @@ $ npm install @zettelyay/api-types
 Clone the repository locally:
 
 ```bash
-$ git clone https://github.com/zettelyay/api-types.git
+$ git clone https://github.com/zettelooo/api-types.git
 ```
 
 Install the dependencies:

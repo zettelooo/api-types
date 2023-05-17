@@ -1,5 +1,5 @@
 {
-  "name": "@zettelyay/api-types",
+  "name": "@zettelooo/api-types",
   "description": "Zettel: Public API types",
   "version": "2.4.1",
   "files": [
@@ -16,7 +16,7 @@
     "clean": "rimraf dist",
     "tsc": "tsc",
     "peers.validate": "check-peer-dependencies --runOnlyOnRootDependencies",
-    "zettel.upgrade": "node -e \"const p = require('./package.json'); const k = Object.keys(p).filter(key => /dependencies$/i.test(key)); const d = k.flatMap(key => Object.keys(p[key]).filter(dep => /^@zettelyay\\//.test(dep)).map(dep => `${dep}@latest`)).join(' '); if(d) { require('child_process').execSync(`npm install --force ${d}`, { encoding: 'utf-8', stdio: 'inherit' }) }\"",
+    "zettel.upgrade": "node -e \"const p = require('./package.json'); const k = Object.keys(p).filter(key => /dependencies$/i.test(key)); const d = k.flatMap(key => Object.keys(p[key]).filter(dep => /^@zettelooo\\//.test(dep)).map(dep => `${dep}@latest`)).join(' '); if(d) { require('child_process').execSync(`npm install --force ${d}`, { encoding: 'utf-8', stdio: 'inherit' }) }\"",
     "updates.check": "ncu",
     "updates.install": "rimraf package-lock.json && ncu --upgrade && npm install",
     "preversion": "git-branch-is master",
@@ -57,6 +57,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zettelyay/api-types"
+    "url": "https://github.com/zettelooo/api-types"
   }
 }
