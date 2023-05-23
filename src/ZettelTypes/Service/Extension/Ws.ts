@@ -1,5 +1,6 @@
+import { CardEntityForExtension } from '../../CardEntityForExtension'
 import { Entity } from '../../Entity'
-import { CardEntityForExtension, PageEntityForExtension } from './types'
+import { PageEntityForExtension } from '../../PageEntityForExtension'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {

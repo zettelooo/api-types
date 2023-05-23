@@ -1,5 +1,6 @@
+import { CardEntityForExtension } from '../../CardEntityForExtension'
 import { Entity } from '../../Entity'
-import { CardEntityForExtension, PageEntityForExtension } from './types'
+import { PageEntityForExtension } from '../../PageEntityForExtension'
 
 export namespace GetUsers {
   export interface Request {
