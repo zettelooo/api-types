@@ -6,7 +6,7 @@ export interface Card extends Base {
   readonly ownerUserId: string
   readonly editorUserId: string | null
   readonly color: string
-  readonly pageId: string | null
+  readonly pageId: string
   readonly sequence: string
   readonly blocks: readonly Block[]
 }
