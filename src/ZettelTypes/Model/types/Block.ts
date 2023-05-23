@@ -21,6 +21,7 @@ export namespace Block {
 
   export interface Base {
     readonly type: Type
+    readonly id: string
   }
 
   export interface Paragraph extends Base, StyledText {
