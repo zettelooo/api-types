@@ -280,8 +280,9 @@ export namespace Cards {
   export namespace Post {
     export interface RequestBody {
       readonly card: Readonly<
-        (Pick<Model.Card, 'blocks'> | { readonly text: string }) &
-          Partial<Pick<Model.Card, 'color' | 'pageId' | 'sequence'>>
+        Pick<Model.Card, 'pageId'> &
+          (Pick<Model.Card, 'blocks'> | { readonly text: string }) &
+          Partial<Pick<Model.Card, 'color' | 'sequence'>>
       >
     }
     export interface ResponseBody {
