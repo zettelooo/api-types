@@ -56,6 +56,15 @@ export namespace SetCardExtensionData {
   export interface Response {}
 }
 
+export namespace SetCardBlockExtensionData {
+  export interface Request<D = any> {
+    readonly cardId: string
+    readonly blockId: string
+    readonly data?: D
+  }
+  export interface Response {}
+}
+
 export namespace AddPage {
   export interface Request<D = any> {
     readonly page: Readonly<
