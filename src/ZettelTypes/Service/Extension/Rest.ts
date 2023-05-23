@@ -59,7 +59,7 @@ export namespace SetCardExtensionData {
 export namespace AddPage {
   export interface Request<D = any> {
     readonly page: Readonly<
-      Pick<PageEntityForExtension<D>, 'ownerId' | 'name'> &
+      Pick<PageEntityForExtension<D>, 'ownerUserId' | 'name'> &
         Partial<
           Pick<
             PageEntityForExtension<D>,
@@ -86,7 +86,6 @@ export namespace EditPage {
       Partial<
         Pick<
           PageEntityForExtension<D>,
-          | 'catalystUserId'
           | 'name'
           | 'description'
           | 'iconEmoji'
@@ -105,7 +104,7 @@ export namespace EditPage {
 export namespace AddCard {
   export interface Request<D = any> {
     readonly card: Readonly<
-      Pick<CardEntityForExtension<D>, 'ownerId' | 'pageId'> &
+      Pick<CardEntityForExtension<D>, 'ownerUserId' | 'pageId'> &
         Partial<Pick<CardEntityForExtension<D>, 'color' | 'sequence' | 'extensionData'>> &
         (Pick<CardEntityForExtension<D>, 'blocks'> | { readonly text: string })
     >
@@ -120,7 +119,7 @@ export namespace EditCard {
     readonly cardId: string
     readonly updates: Readonly<
       Partial<
-        Pick<CardEntityForExtension<D>, 'catalystUserId' | 'pageId' | 'color' | 'sequence' | 'extensionData'> &
+        Pick<CardEntityForExtension<D>, 'pageId' | 'color' | 'sequence' | 'extensionData'> &
           (Pick<CardEntityForExtension<D>, 'blocks'> | { readonly text: string })
       >
     >

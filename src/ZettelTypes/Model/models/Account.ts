@@ -5,7 +5,7 @@ export interface Account extends Base {
   readonly name: string
   readonly userName: string
   readonly email: string
-  readonly backgroundColor: string
+  readonly color: string
   readonly avatarFileId: string | null
   readonly walletAddress: string | null
 }

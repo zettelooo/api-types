@@ -3,8 +3,8 @@ import { Block } from '../types/Block'
 
 export interface Card extends Base {
   readonly type: Type.Card
-  readonly catalystUserId: string
-  readonly ownerId: string
+  readonly ownerUserId: string
+  readonly editorUserId: string | null
   readonly color: string
   readonly pageId: string | null
   readonly sequence: string

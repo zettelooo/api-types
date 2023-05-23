@@ -121,7 +121,7 @@ export namespace Account {
   export namespace Put {
     /** Authenticated with `Access-Token` only. */
     export interface RequestBody {
-      readonly updates: Partial<Pick<Model.Account, 'name' | 'userName' | 'email' | 'backgroundColor' | 'avatarFileId'>>
+      readonly updates: Partial<Pick<Model.Account, 'name' | 'userName' | 'email' | 'color' | 'avatarFileId'>>
     }
   }
 }
@@ -167,7 +167,7 @@ export namespace Pages {
     export interface RequestBody {
       readonly page: Readonly<
         Pick<Model.Page, 'name'> &
-          Partial<Pick<Model.Page, 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'viewMode' | 'public'>>
+          Partial<Pick<Model.Page, 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'view' | 'public'>>
       >
       readonly addOwnerPageMember?: boolean
     }
@@ -196,9 +196,7 @@ export namespace Pages {
       }
       export interface RequestBody {
         readonly updates: Readonly<
-          Partial<
-            Pick<Model.Page, 'name' | 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'viewMode' | 'public'>
-          >
+          Partial<Pick<Model.Page, 'name' | 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'view' | 'public'>>
         >
       }
     }

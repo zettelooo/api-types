@@ -21,44 +21,34 @@ export namespace Block {
 
   export interface Base {
     readonly type: Type
-    readonly id: string
   }
 
-  export interface Paragraph extends Base {
+  export interface Paragraph extends Base, StyledText {
     readonly type: Type.Paragraph
-    readonly styledText: StyledText
   }
 
-  export interface Header extends Base {
+  export interface Header extends Base, StyledText {
     readonly type: Type.Header
-    readonly styledText: StyledText
     readonly level: 1 | 2 | 3 | 4 | 5 | 6
   }
 
-  export interface Quote extends Base {
+  export interface Quote extends Base, StyledText {
     readonly type: Type.Quote
-    readonly innerId: string
-    readonly styledText: StyledText
   }
 
   export interface Code extends Base {
     readonly type: Type.Code
     readonly text: string
     readonly programmingLanguage: string | null
-    readonly caption: string | null
   }
 
-  export interface ListItem extends Base {
+  export interface ListItem extends Base, StyledText {
     readonly type: Type.ListItem
-    readonly innerId: string
-    readonly styledText: StyledText
     readonly ordered: boolean
   }
 
-  export interface Task extends Base {
+  export interface Task extends Base, StyledText {
     readonly type: Type.Task
-    readonly innerId: string
-    readonly styledText: StyledText
     readonly dueDate: number | null
     readonly isChecked: boolean
     readonly checkedByUserId: string | null
@@ -67,7 +57,6 @@ export namespace Block {
 
   export interface Attachment extends Base {
     readonly type: Type.Attachment
-    readonly name: string | null
     readonly files: readonly Attachment.File[]
   }
 
@@ -93,46 +82,12 @@ export namespace Block {
       readonly styles: readonly Style[]
     }
 
-    export type Style<T extends Style.Type = Style.Type> = {
-      [Style.Type.Strong]: Style.Strong
-      [Style.Type.Emphasis]: Style.Emphasis
-      [Style.Type.Code]: Style.Code
-      [Style.Type.LineThrough]: Style.LineThrough
-      [Style.Type.UnderLine]: Style.UnderLine
-    }[T]
-
-    export namespace Style {
-      export enum Type {
-        Strong = 'STRONG',
-        Emphasis = 'EMPHASIS',
-        Code = 'CODE',
-        LineThrough = 'LINE_THROUGH',
-        UnderLine = 'UNDER_LINE',
-      }
-
-      export interface Base {
-        readonly type: Type
-      }
-
-      export interface Strong extends Base {
-        readonly type: Type.Strong
-      }
-
-      export interface Emphasis extends Base {
-        readonly type: Type.Emphasis
-      }
-
-      export interface Code extends Base {
-        readonly type: Type.Code
-      }
-
-      export interface LineThrough extends Base {
-        readonly type: Type.LineThrough
-      }
-
-      export interface UnderLine extends Base {
-        readonly type: Type.UnderLine
-      }
+    export enum Style {
+      Strong = 'STRONG',
+      Emphasis = 'EMPHASIS',
+      Code = 'CODE',
+      LineThrough = 'LINE_THROUGH',
+      UnderLine = 'UNDER_LINE',
     }
 
     export type Annotation<T extends Annotation.Type = Annotation.Type> = {
@@ -154,7 +109,6 @@ export namespace Block {
 
       export interface Base {
         readonly type: Type
-        readonly id: string
         readonly from: number
         readonly to: number
       }
@@ -162,6 +116,7 @@ export namespace Block {
       export interface HyperLink extends Base {
         readonly type: Type.HyperLink
         readonly url: string
+        readonly iconUrl: string | null
       }
 
       export interface PlainLink extends Base {
@@ -174,14 +129,14 @@ export namespace Block {
         readonly referencedUserId: string
       }
 
-      export interface ReferencedCard extends Base {
-        readonly type: Type.ReferencedCard
-        readonly referencedCardId: string
-      }
-
       export interface ReferencedPage extends Base {
         readonly type: Type.ReferencedPage
         readonly referencedPageId: string
+      }
+
+      export interface ReferencedCard extends Base {
+        readonly type: Type.ReferencedCard
+        readonly referencedCardId: string
       }
     }
   }

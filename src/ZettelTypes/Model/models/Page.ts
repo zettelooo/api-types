@@ -2,19 +2,18 @@ import { Base, Type } from '../types'
 
 export interface Page extends Base {
   readonly type: Type.Page
-  readonly catalystUserId: string
+  readonly ownerUserId: string
   readonly name: string
   readonly description: string
-  readonly ownerId: string
   readonly iconEmoji: string
   readonly color: string
   readonly avatarFileId: string | null
-  readonly viewMode: Page.ViewMode
+  readonly view: Page.View
   readonly public: boolean
 }
 
 export namespace Page {
-  export enum ViewMode {
+  export enum View {
     List = 'LIST',
     Gallery = 'GALLERY',
   }
