@@ -15,13 +15,13 @@ export namespace GetUpdates {
     }
   }
 
-  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any> = {
+  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any, BD = any> = {
     [Response.Type.Started]: {
       readonly type: Response.Type.Started
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation
-      readonly mutation: Response.Mutation<PD, CD>
+      readonly mutation: Response.Mutation<PD, CD, BD>
     }
   }[T]
 
@@ -31,7 +31,7 @@ export namespace GetUpdates {
       Mutation = 'MUTATION',
     }
 
-    export type Mutation<PD = any, CD = any> =
+    export type Mutation<PD = any, CD = any, BD = any> =
       | {
           readonly type: 'user'
           readonly newUser: Entity.User
@@ -50,8 +50,8 @@ export namespace GetUpdates {
         }
       | {
           readonly type: 'card'
-          readonly newCard: CardEntityForExtension<CD>
-          readonly oldCard?: CardEntityForExtension<CD>
+          readonly newCard: CardEntityForExtension<CD, BD>
+          readonly oldCard?: CardEntityForExtension<CD, BD>
           readonly page: PageEntityForExtension<PD>
         }
   }
