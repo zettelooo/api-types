@@ -1,4 +1,4 @@
-import { Entity } from '../../Entity'
+import { Entity } from '../Entity'
 
 export type Request<T extends Request.Type = Request.Type> = {
   [Request.Type.Start]: {

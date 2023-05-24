@@ -1,6 +1,4 @@
-import { CardEntityForExtension } from '../../CardEntityForExtension'
-import { Entity } from '../../Entity'
-import { PageEntityForExtension } from '../../PageEntityForExtension'
+import { Entity } from '../Entity'
 
 export namespace GetUsers {
   export interface Request {
@@ -17,7 +15,7 @@ export namespace GetPages {
     readonly withExtensionInstalled?: boolean
   }
   export interface Response<D = any> {
-    readonly pages: readonly PageEntityForExtension<D>[]
+    readonly pages: readonly Entity.Page<D>[]
   }
 }
 
@@ -37,7 +35,7 @@ export namespace GetCards {
     readonly pageIds?: readonly string[]
   }
   export interface Response<CD = any, BD = any> {
-    readonly cards: readonly CardEntityForExtension<CD, BD>[]
+    readonly cards: readonly Entity.Card<CD, BD>[]
   }
 }
 
@@ -69,10 +67,10 @@ export namespace SetCardBlockExtensionData {
 export namespace AddPage {
   export interface Request<D = any> {
     readonly page: Readonly<
-      Pick<PageEntityForExtension<D>, 'ownerUserId' | 'name'> &
+      Pick<Entity.Page<D>, 'ownerUserId' | 'name'> &
         Partial<
           Pick<
-            PageEntityForExtension<D>,
+            Entity.Page<D>,
             | 'description'
             | 'iconEmoji'
             | 'color'
@@ -95,7 +93,7 @@ export namespace EditPage {
     readonly updates: Readonly<
       Partial<
         Pick<
-          PageEntityForExtension<D>,
+          Entity.Page<D>,
           | 'name'
           | 'description'
           | 'iconEmoji'
@@ -114,9 +112,9 @@ export namespace EditPage {
 export namespace AddCard {
   export interface Request<CD = any, BD = any> {
     readonly card: Readonly<
-      Pick<CardEntityForExtension<CD, BD>, 'ownerUserId' | 'pageId'> &
-        Partial<Pick<CardEntityForExtension<CD, BD>, 'color' | 'sequence' | 'extensionData'>> &
-        (Pick<CardEntityForExtension<CD, BD>, 'blocks'> | { readonly text: string })
+      Pick<Entity.Card<CD, BD>, 'ownerUserId' | 'pageId'> &
+        Partial<Pick<Entity.Card<CD, BD>, 'color' | 'sequence' | 'extensionData'>> &
+        (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
     >
   }
   export interface Response {
@@ -129,8 +127,8 @@ export namespace EditCard {
     readonly cardId: string
     readonly updates: Readonly<
       Partial<
-        Pick<CardEntityForExtension<CD, BD>, 'pageId' | 'color' | 'sequence' | 'extensionData'> &
-          (Pick<CardEntityForExtension<CD, BD>, 'blocks'> | { readonly text: string })
+        Pick<Entity.Card<CD, BD>, 'pageId' | 'color' | 'sequence' | 'extensionData'> &
+          (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
       >
     >
   }

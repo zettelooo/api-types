@@ -1,6 +1,4 @@
-import { CardEntityForExtension } from '../../CardEntityForExtension'
-import { Entity } from '../../Entity'
-import { PageEntityForExtension } from '../../PageEntityForExtension'
+import { Entity } from '../Entity'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {
@@ -40,20 +38,20 @@ export namespace GetUpdates {
         }
       | {
           readonly type: 'page'
-          readonly newPage: PageEntityForExtension<PD>
-          readonly oldPage?: PageEntityForExtension<PD>
+          readonly newPage: Entity.Page<PD>
+          readonly oldPage?: Entity.Page<PD>
         }
       | {
           readonly type: 'page member'
           readonly newPageMember: Entity.PageMember
           readonly oldPageMember?: Entity.PageMember
-          readonly page: PageEntityForExtension<PD>
+          readonly page: Entity.Page<PD>
         }
       | {
           readonly type: 'card'
-          readonly newCard: CardEntityForExtension<CD, BD>
-          readonly oldCard?: CardEntityForExtension<CD, BD>
-          readonly page: PageEntityForExtension<PD>
+          readonly newCard: Entity.Card<CD, BD>
+          readonly oldCard?: Entity.Card<CD, BD>
+          readonly page: Entity.Page<PD>
         }
   }
 }

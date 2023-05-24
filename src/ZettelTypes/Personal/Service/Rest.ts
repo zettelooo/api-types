@@ -1,5 +1,5 @@
-import { Entity } from '../../Entity'
 import { Model } from '../../Model'
+import { Entity } from '../Entity'
 
 export namespace Utilities {
   export namespace Ids {
