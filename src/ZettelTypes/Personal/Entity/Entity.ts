@@ -1,14 +1,11 @@
 import { Model } from '../../Model'
 
 export type ByType<T extends Model.Type = Model.Type> = {
-  [Model.Type.Account]: Account
   [Model.Type.User]: User
   [Model.Type.Page]: Page
   [Model.Type.PageMember]: PageMember
   [Model.Type.Card]: Card
 }[T]
-
-export type Account = Metadata & Model.ByType<Model.Type.Account>
 
 export type User = Metadata & Model.ByType<Model.Type.User>
 

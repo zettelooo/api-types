@@ -66,11 +66,6 @@ export namespace Response {
 
   export type Mutation =
     | {
-        readonly type: 'account'
-        readonly newAccount: Entity.Account
-        readonly oldAccount?: Entity.Account
-      }
-    | {
         readonly type: 'user'
         readonly newUser: Entity.User
         readonly oldUser?: Entity.User

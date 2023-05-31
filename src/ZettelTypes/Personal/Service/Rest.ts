@@ -114,14 +114,14 @@ export namespace Account {
   /** Authenticated with `Access-Token` or `API-Key`. */
   export namespace Get {
     export interface ResponseBody {
-      readonly account: Entity.Account
+      readonly account: Entity.User
     }
   }
 
   export namespace Put {
     /** Authenticated with `Access-Token` only. */
     export interface RequestBody {
-      readonly updates: Partial<Pick<Model.Account, 'name' | 'userName' | 'email' | 'color' | 'avatarFileId'>>
+      readonly updates: Partial<Pick<Model.User, 'name' | 'userName' | 'email' | 'color' | 'avatarFileId'>>
     }
   }
 }

@@ -1,6 +1,5 @@
 export * from './types'
 
-export * from './models/Account'
 export * from './models/User'
 export * from './models/Page'
 export * from './models/PageMember'
