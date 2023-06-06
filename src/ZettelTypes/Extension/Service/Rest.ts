@@ -43,6 +43,7 @@ export namespace SetPageExtensionData {
   export interface Request<D = any> {
     readonly pageId: string
     readonly data?: D
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
@@ -51,6 +52,7 @@ export namespace SetCardExtensionData {
   export interface Request<D = any> {
     readonly cardId: string
     readonly data?: D
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
@@ -60,6 +62,7 @@ export namespace SetCardBlockExtensionData {
     readonly cardId: string
     readonly blockId: string
     readonly data?: D
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
@@ -81,6 +84,7 @@ export namespace AddPage {
           >
         >
     >
+    readonly senderRegistrationKey?: string
   }
   export interface Response {
     readonly pageId: string
@@ -105,6 +109,7 @@ export namespace EditPage {
         >
       >
     >
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
@@ -116,6 +121,7 @@ export namespace AddCard {
         Partial<Pick<Entity.Card<CD, BD>, 'color' | 'sequence' | 'extensionData'>> &
         (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
     >
+    readonly senderRegistrationKey?: string
   }
   export interface Response {
     readonly cardId: string
@@ -131,6 +137,7 @@ export namespace EditCard {
           (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
       >
     >
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
@@ -145,6 +152,7 @@ export namespace AddBadge {
         readonly cardId: string
       }
     }
+    readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }

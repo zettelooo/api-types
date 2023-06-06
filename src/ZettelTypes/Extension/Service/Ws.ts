@@ -17,6 +17,7 @@ export namespace GetUpdates {
   export type Response<T extends Response.Type = Response.Type, PD = any, CD = any, BD = any> = {
     [Response.Type.Started]: {
       readonly type: Response.Type.Started
+      readonly registrationKey: string
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation

@@ -46,6 +46,7 @@ export namespace Request {
 export type Response<T extends Response.Type = Response.Type> = {
   [Response.Type.Started]: {
     readonly type: Response.Type.Started
+    readonly registrationKey: string
   }
   [Response.Type.Subscriptions]: {
     readonly type: Response.Type.Subscriptions

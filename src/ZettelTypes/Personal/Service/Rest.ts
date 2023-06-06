@@ -122,6 +122,7 @@ export namespace Account {
     /** Authenticated with `Access-Token` only. */
     export interface RequestBody {
       readonly updates: Partial<Pick<Model.User, 'name' | 'userName' | 'email' | 'color' | 'avatarFileId'>>
+      readonly senderRegistrationKey?: string
     }
   }
 }
@@ -170,6 +171,7 @@ export namespace Pages {
           Partial<Pick<Model.Page, 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'view' | 'public'>>
       >
       readonly addOwnerPageMember?: boolean
+      readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
       readonly id: string
@@ -198,6 +200,7 @@ export namespace Pages {
         readonly updates: Readonly<
           Partial<Pick<Model.Page, 'name' | 'description' | 'iconEmoji' | 'color' | 'avatarFileId' | 'view' | 'public'>>
         >
+        readonly senderRegistrationKey?: string
       }
     }
 
@@ -205,6 +208,9 @@ export namespace Pages {
     export namespace Delete {
       export interface RequestParams {
         readonly pageId: string
+      }
+      export interface RequestBody {
+        readonly senderRegistrationKey?: string
       }
     }
   }
@@ -227,6 +233,7 @@ export namespace PageMembers {
       readonly pageMember: Readonly<
         Pick<Model.PageMember, 'pageId'> & Partial<Pick<Model.PageMember, 'userId' | 'role'>>
       >
+      readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
       readonly id: string
@@ -251,6 +258,7 @@ export namespace PageMembers {
       }
       export interface RequestBody {
         readonly updates: Readonly<Partial<Pick<Model.PageMember, 'role'>>>
+        readonly senderRegistrationKey?: string
       }
     }
 
@@ -258,6 +266,9 @@ export namespace PageMembers {
     export namespace Delete {
       export interface RequestParams {
         readonly pageMemberId: string
+      }
+      export interface RequestBody {
+        readonly senderRegistrationKey?: string
       }
     }
   }
@@ -284,6 +295,7 @@ export namespace Cards {
           (Pick<Model.Card, 'blocks'> | { readonly text: string }) &
           Partial<Pick<Model.Card, 'color' | 'sequence'>>
       >
+      readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
       readonly id: string
@@ -308,6 +320,7 @@ export namespace Cards {
       }
       export interface RequestBody {
         readonly updates: Readonly<Partial<Pick<Model.Card, 'color' | 'pageId' | 'sequence' | 'blocks'>>>
+        readonly senderRegistrationKey?: string
       }
     }
 
@@ -315,6 +328,9 @@ export namespace Cards {
     export namespace Delete {
       export interface RequestParams {
         readonly cardId: string
+      }
+      export interface RequestBody {
+        readonly senderRegistrationKey?: string
       }
     }
   }
