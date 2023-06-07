@@ -126,7 +126,7 @@ export namespace AddCard {
             }
           | {
               readonly blocks: readonly ({
-                [T in Model.Block.Type]: Omit<Entity.Block<T, number>, 'id'>
+                [T in Model.Block.Type]: Omit<Entity.Block<T, BD>, 'id'>
               }[Model.Block.Type] & { readonly id?: string })[]
             }
         )
@@ -150,7 +150,7 @@ export namespace EditCard {
               }
             | {
                 readonly blocks: readonly ({
-                  [T in Model.Block.Type]: Omit<Entity.Block<T, number>, 'id'>
+                  [T in Model.Block.Type]: Omit<Entity.Block<T, BD>, 'id'>
                 }[Model.Block.Type] & { readonly id?: string })[]
               }
           )
