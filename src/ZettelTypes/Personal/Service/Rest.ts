@@ -292,7 +292,14 @@ export namespace Cards {
     export interface RequestBody {
       readonly card: Readonly<
         Pick<Model.Card, 'pageId'> &
-          (Pick<Model.Card, 'blocks'> | { readonly text: string }) &
+          (
+            | {
+                readonly text: string
+              }
+            | {
+                readonly blocks: readonly (Omit<Model.Block, 'id'> & { readonly id?: string })[]
+              }
+          ) &
           Partial<Pick<Model.Card, 'color' | 'sequence'>>
       >
       readonly senderRegistrationKey?: string
@@ -319,7 +326,19 @@ export namespace Cards {
         readonly cardId: string
       }
       export interface RequestBody {
-        readonly updates: Readonly<Partial<Pick<Model.Card, 'color' | 'pageId' | 'sequence' | 'blocks'>>>
+        readonly updates: Readonly<
+          Partial<
+            Pick<Model.Card, 'color' | 'pageId' | 'sequence'> &
+              (
+                | {
+                    readonly text: string
+                  }
+                | {
+                    readonly blocks: readonly (Omit<Model.Block, 'id'> & { readonly id?: string })[]
+                  }
+              )
+          >
+        >
         readonly senderRegistrationKey?: string
       }
     }

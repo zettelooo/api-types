@@ -1,3 +1,4 @@
+import { Model } from '../../Model'
 import { Entity } from '../Entity'
 
 export namespace GetUsers {
@@ -119,7 +120,14 @@ export namespace AddCard {
     readonly card: Readonly<
       Pick<Entity.Card<CD, BD>, 'ownerUserId' | 'pageId'> &
         Partial<Pick<Entity.Card<CD, BD>, 'color' | 'sequence' | 'extensionData'>> &
-        (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
+        (
+          | {
+              readonly text: string
+            }
+          | {
+              readonly blocks: readonly (Omit<Entity.Block<Model.Block.Type, BD>, 'id'> & { readonly id?: string })[]
+            }
+        )
     >
     readonly senderRegistrationKey?: string
   }
@@ -134,7 +142,14 @@ export namespace EditCard {
     readonly updates: Readonly<
       Partial<
         Pick<Entity.Card<CD, BD>, 'pageId' | 'color' | 'sequence' | 'extensionData'> &
-          (Pick<Entity.Card<CD, BD>, 'blocks'> | { readonly text: string })
+          (
+            | {
+                readonly text: string
+              }
+            | {
+                readonly blocks: readonly (Omit<Entity.Block<Model.Block.Type, BD>, 'id'> & { readonly id?: string })[]
+              }
+          )
       >
     >
     readonly senderRegistrationKey?: string
