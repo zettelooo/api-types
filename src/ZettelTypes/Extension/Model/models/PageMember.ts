@@ -1,9 +1,11 @@
-import { Base, Type } from '../types'
+import { Id } from '@zettelooo/commons'
+import { Base } from '../Base'
+import { Type } from '../Type'
 
 export interface PageMember extends Base {
   readonly type: Type.PageMember
-  readonly pageId: string
-  readonly userId: string
+  readonly pageId: Id
+  readonly userId: Id
   readonly role: PageMember.Role
 }
 

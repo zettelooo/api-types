@@ -1,32 +1,32 @@
-import { Model } from '../../Model'
-import { Entity } from '../Entity'
+import { Id } from '@zettelooo/commons'
+import { Model } from '../Model'
 
 export namespace GetUsers {
   export interface Request {
-    readonly userIds: readonly string[]
+    readonly userIds: readonly Id[]
   }
   export interface Response {
-    readonly users: readonly Entity.User[]
+    readonly users: readonly Model.User[]
   }
 }
 
 export namespace GetPages {
   export interface Request {
-    readonly pageIds?: readonly string[]
+    readonly pageIds?: readonly Id[]
     readonly withExtensionInstalled?: boolean
   }
-  export interface Response<D = any> {
-    readonly pages: readonly Entity.Page<D>[]
+  export interface Response<PD = any> {
+    readonly pages: readonly Model.Page<PD>[]
   }
 }
 
 export namespace GetPageMembers {
   export interface Request {
-    readonly userIds?: readonly string[]
-    readonly pageIds?: readonly string[]
+    readonly userIds?: readonly Id[]
+    readonly pageIds?: readonly Id[]
   }
   export interface Response {
-    readonly pageMembers: readonly Entity.PageMember[]
+    readonly pageMembers: readonly Model.PageMember[]
   }
 }
 
@@ -35,46 +35,36 @@ export namespace GetCards {
     readonly cardIds?: readonly string[]
     readonly pageIds?: readonly string[]
   }
-  export interface Response<CD = any, BD = any> {
-    readonly cards: readonly Entity.Card<CD, BD>[]
+  export interface Response<CD = any> {
+    readonly cards: readonly Model.Card<CD>[]
   }
 }
 
 export namespace SetPageExtensionData {
-  export interface Request<D = any> {
+  export interface Request<PD = any> {
     readonly pageId: string
-    readonly data?: D
+    readonly data?: PD
     readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
 
 export namespace SetCardExtensionData {
-  export interface Request<D = any> {
-    readonly cardId: string
-    readonly data?: D
-    readonly senderRegistrationKey?: string
-  }
-  export interface Response {}
-}
-
-export namespace SetCardBlockExtensionData {
-  export interface Request<D = any> {
-    readonly cardId: string
-    readonly blockId: string
-    readonly data?: D
+  export interface Request<CD = any> {
+    readonly cardId: Id
+    readonly data?: CD
     readonly senderRegistrationKey?: string
   }
   export interface Response {}
 }
 
 export namespace AddPage {
-  export interface Request<D = any> {
+  export interface Request<PD = any> {
     readonly page: Readonly<
-      Pick<Entity.Page<D>, 'ownerUserId' | 'name'> &
+      Pick<Model.Page<PD>, 'ownerUserId' | 'name'> &
         Partial<
           Pick<
-            Entity.Page<D>,
+            Model.Page<PD>,
             | 'description'
             | 'iconEmoji'
             | 'color'
@@ -88,17 +78,17 @@ export namespace AddPage {
     readonly senderRegistrationKey?: string
   }
   export interface Response {
-    readonly pageId: string
+    readonly pageId: Id
   }
 }
 
 export namespace EditPage {
-  export interface Request<D = any> {
-    readonly pageId: string
+  export interface Request<PD = any> {
+    readonly pageId: Id
     readonly updates: Readonly<
       Partial<
         Pick<
-          Entity.Page<D>,
+          Model.Page<PD>,
           | 'name'
           | 'description'
           | 'iconEmoji'
@@ -116,45 +106,23 @@ export namespace EditPage {
 }
 
 export namespace AddCard {
-  export interface Request<CD = any, BD = any> {
+  export interface Request<CD = any> {
     readonly card: Readonly<
-      Pick<Entity.Card<CD, BD>, 'ownerUserId' | 'pageId'> &
-        Partial<Pick<Entity.Card<CD, BD>, 'color' | 'sequence' | 'extensionData'>> &
-        (
-          | {
-              readonly text: string
-            }
-          | {
-              readonly blocks: readonly ({
-                [T in Model.Block.Type]: Omit<Entity.Block<T, BD>, 'id'>
-              }[Model.Block.Type] & { readonly id?: string })[]
-            }
-        )
+      Pick<Model.Card<CD>, 'ownerUserId' | 'pageId'> &
+        Partial<Pick<Model.Card<CD>, 'color' | 'sequence' | 'text' | 'files' | 'extensionData'>>
     >
     readonly senderRegistrationKey?: string
   }
   export interface Response {
-    readonly cardId: string
+    readonly cardId: Id
   }
 }
 
 export namespace EditCard {
-  export interface Request<CD = any, BD = any> {
-    readonly cardId: string
+  export interface Request<CD = any> {
+    readonly cardId: Id
     readonly updates: Readonly<
-      Partial<
-        Pick<Entity.Card<CD, BD>, 'pageId' | 'color' | 'sequence' | 'extensionData'> &
-          (
-            | {
-                readonly text: string
-              }
-            | {
-                readonly blocks: readonly ({
-                  [T in Model.Block.Type]: Omit<Entity.Block<T, BD>, 'id'>
-                }[Model.Block.Type] & { readonly id?: string })[]
-              }
-          )
-      >
+      Partial<Pick<Model.Card<CD>, 'pageId' | 'color' | 'sequence' | 'text' | 'files' | 'extensionData'>>
     >
     readonly senderRegistrationKey?: string
   }
@@ -164,11 +132,11 @@ export namespace EditCard {
 export namespace AddBadge {
   export interface Request {
     readonly badge: {
-      readonly userId: string
+      readonly userId: Id
       // For now only this badge action type is needed, we may improve this later:
       readonly mentionInCard: {
-        readonly userId: string
-        readonly cardId: string
+        readonly userId: Id
+        readonly cardId: Id
       }
     }
     readonly senderRegistrationKey?: string

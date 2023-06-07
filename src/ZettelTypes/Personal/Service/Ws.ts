@@ -1,4 +1,5 @@
-import { Entity } from '../Entity'
+import { Id } from '@zettelooo/commons'
+import { Model } from '../Model'
 
 export type Request<T extends Request.Type = Request.Type> = {
   [Request.Type.Start]: {
@@ -25,12 +26,12 @@ export type Request<T extends Request.Type = Request.Type> = {
         readonly newSubscriptions?: undefined
         readonly allUserRelatedEntities?: boolean
         readonly account?: boolean
-        readonly addUserIds?: readonly string[]
-        readonly removeUserIds?: readonly string[]
-        readonly addPageIds?: readonly string[]
-        readonly removePageIds?: readonly string[]
-        readonly addPageWithCardsIds?: readonly string[]
-        readonly removePageWithCardsIds?: readonly string[]
+        readonly addUserIds?: readonly Id[]
+        readonly removeUserIds?: readonly Id[]
+        readonly addPageIds?: readonly Id[]
+        readonly removePageIds?: readonly Id[]
+        readonly addPageWithCardsIds?: readonly Id[]
+        readonly removePageWithCardsIds?: readonly Id[]
         readonly pagelessCards?: boolean
       }
   )
@@ -68,31 +69,31 @@ export namespace Response {
   export type Mutation =
     | {
         readonly type: 'user'
-        readonly newUser: Entity.User
-        readonly oldUser?: Entity.User
+        readonly newUser: Model.User
+        readonly oldUser?: Model.User
       }
     | {
         readonly type: 'page'
-        readonly newPage: Entity.Page
-        readonly oldPage?: Entity.Page
+        readonly newPage: Model.Page
+        readonly oldPage?: Model.Page
       }
     | {
         readonly type: 'page member'
-        readonly newPageMember: Entity.PageMember
-        readonly oldPageMember?: Entity.PageMember
+        readonly newPageMember: Model.PageMember
+        readonly oldPageMember?: Model.PageMember
       }
     | {
         readonly type: 'card'
-        readonly newCard: Entity.Card
-        readonly oldCard?: Entity.Card
+        readonly newCard: Model.Card
+        readonly oldCard?: Model.Card
       }
 }
 
 export interface Subscriptions {
   readonly allUserRelatedEntities: boolean
   readonly account: boolean
-  readonly userIds: readonly string[]
-  readonly pageIds: readonly string[]
-  readonly pageWithCardsIds: readonly string[]
+  readonly userIds: readonly Id[]
+  readonly pageIds: readonly Id[]
+  readonly pageWithCardsIds: readonly Id[]
   readonly pagelessCards: boolean
 }

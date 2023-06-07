@@ -1,5 +1,5 @@
-import { Model } from '../../Model'
-import { Entity } from '../Entity'
+import { Id } from '@zettelooo/commons'
+import { Model } from '../Model'
 
 export namespace Utilities {
   export namespace Ids {
@@ -9,7 +9,7 @@ export namespace Utilities {
         readonly count?: number
       }
       export interface ResponseBody {
-        ids: string[]
+        ids: Id[]
       }
     }
   }
@@ -65,7 +65,7 @@ export namespace Auth {
           readonly walletAddress: string
           readonly nonceMessage: string
           readonly signedNonceMessage: string
-          readonly deviceId: string
+          readonly deviceId: Id
         }
         export interface ResponseBody {
           readonly accessToken: string
@@ -114,7 +114,7 @@ export namespace Account {
   /** Authenticated with `Access-Token` or `API-Key`. */
   export namespace Get {
     export interface ResponseBody {
-      readonly account: Entity.User
+      readonly account: Model.User
     }
   }
 
@@ -132,10 +132,10 @@ export namespace Users {
     /** No authentication. */
     export namespace Get {
       export interface RequstParams {
-        readonly userId: string
+        readonly userId: Id
       }
       export interface ResponseBody {
-        readonly user: Entity.User
+        readonly user: Model.User
       }
     }
   }
@@ -149,7 +149,7 @@ export namespace Users {
         readonly limit?: number
       }
       export interface ResponseBody {
-        readonly users: readonly Entity.User[]
+        readonly users: readonly Model.User[]
       }
     }
   }
@@ -159,7 +159,7 @@ export namespace Pages {
   /** Authenticated with `Access-Token` or `API-Key`. */
   export namespace Get {
     export interface ResponseBody {
-      readonly pages: readonly Entity.Page[]
+      readonly pages: readonly Model.Page[]
     }
   }
 
@@ -174,8 +174,8 @@ export namespace Pages {
       readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
-      readonly id: string
-      readonly ownerPageMemberId?: string
+      readonly id: Id
+      readonly ownerPageMemberId?: Id
     }
   }
 
@@ -183,18 +183,18 @@ export namespace Pages {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Get {
       export interface RequestParams {
-        readonly pageId: string
+        readonly pageId: Id
       }
       export interface ResponseBody {
-        readonly page: Entity.Page
-        readonly membership: Entity.PageMember
+        readonly page: Model.Page
+        readonly membership: Model.PageMember
       }
     }
 
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Put {
       export interface RequestParams {
-        readonly pageId: string
+        readonly pageId: Id
       }
       export interface RequestBody {
         readonly updates: Readonly<
@@ -207,7 +207,7 @@ export namespace Pages {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Delete {
       export interface RequestParams {
-        readonly pageId: string
+        readonly pageId: Id
       }
       export interface RequestBody {
         readonly senderRegistrationKey?: string
@@ -223,7 +223,7 @@ export namespace PageMembers {
       readonly page_id: string
     }
     export interface ResponseBody {
-      readonly pageMembers: readonly Entity.PageMember[]
+      readonly pageMembers: readonly Model.PageMember[]
     }
   }
 
@@ -236,7 +236,7 @@ export namespace PageMembers {
       readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
-      readonly id: string
+      readonly id: Id
     }
   }
 
@@ -244,17 +244,17 @@ export namespace PageMembers {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Get {
       export interface RequestParams {
-        readonly pageMemberId: string
+        readonly pageMemberId: Id
       }
       export interface ResponseBody {
-        readonly pageMember: Entity.PageMember
+        readonly pageMember: Model.PageMember
       }
     }
 
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Put {
       export interface RequestParams {
-        readonly pageMemberId: string
+        readonly pageMemberId: Id
       }
       export interface RequestBody {
         readonly updates: Readonly<Partial<Pick<Model.PageMember, 'role'>>>
@@ -265,7 +265,7 @@ export namespace PageMembers {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Delete {
       export interface RequestParams {
-        readonly pageMemberId: string
+        readonly pageMemberId: Id
       }
       export interface RequestBody {
         readonly senderRegistrationKey?: string
@@ -283,7 +283,7 @@ export namespace Cards {
       readonly limit?: number
     }
     export interface ResponseBody {
-      readonly cards: readonly Entity.Card[]
+      readonly cards: readonly Model.Card[]
     }
   }
 
@@ -291,23 +291,12 @@ export namespace Cards {
   export namespace Post {
     export interface RequestBody {
       readonly card: Readonly<
-        Pick<Model.Card, 'pageId'> &
-          (
-            | {
-                readonly text: string
-              }
-            | {
-                readonly blocks: readonly ({
-                  [T in Model.Block.Type]: Omit<Model.Block<T>, 'id'>
-                }[Model.Block.Type] & { readonly id?: string })[]
-              }
-          ) &
-          Partial<Pick<Model.Card, 'color' | 'sequence'>>
+        Pick<Model.Card, 'pageId'> & Partial<Pick<Model.Card, 'color' | 'sequence' | 'text' | 'files'>>
       >
       readonly senderRegistrationKey?: string
     }
     export interface ResponseBody {
-      readonly id: string
+      readonly id: Id
     }
   }
 
@@ -315,34 +304,20 @@ export namespace Cards {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Get {
       export interface RequestParams {
-        readonly cardId: string
+        readonly cardId: Id
       }
       export interface ResponseBody {
-        readonly card: Entity.Card
+        readonly card: Model.Card
       }
     }
 
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Put {
       export interface RequestParams {
-        readonly cardId: string
+        readonly cardId: Id
       }
       export interface RequestBody {
-        readonly updates: Readonly<
-          Partial<
-            Pick<Model.Card, 'color' | 'pageId' | 'sequence'> &
-              (
-                | {
-                    readonly text: string
-                  }
-                | {
-                    readonly blocks: readonly ({
-                      [T in Model.Block.Type]: Omit<Model.Block<T>, 'id'>
-                    }[Model.Block.Type] & { readonly id?: string })[]
-                  }
-              )
-          >
-        >
+        readonly updates: Readonly<Partial<Pick<Model.Card, 'color' | 'pageId' | 'sequence' | 'text' | 'files'>>>
         readonly senderRegistrationKey?: string
       }
     }
@@ -350,7 +325,7 @@ export namespace Cards {
     /** Authenticated with `Access-Token` or `API-Key`. */
     export namespace Delete {
       export interface RequestParams {
-        readonly cardId: string
+        readonly cardId: Id
       }
       export interface RequestBody {
         readonly senderRegistrationKey?: string
@@ -364,10 +339,10 @@ export namespace PublicPages {
     /** No authentication. */
     export namespace Get {
       export interface RequestParams {
-        readonly publicPageId: string
+        readonly publicPageId: Id
       }
       export interface ResponseBody {
-        readonly publicPage: Entity.Page
+        readonly publicPage: Model.Page
       }
     }
 
@@ -375,14 +350,14 @@ export namespace PublicPages {
       /** No authentication. */
       export namespace Get {
         export interface RequestParams {
-          readonly publicPageId: string
+          readonly publicPageId: Id
         }
         export interface RequestQuery {
           readonly skip?: number
           readonly limit?: number
         }
         export interface ResponseBody {
-          readonly cards: readonly Entity.Card[]
+          readonly cards: readonly Model.Card[]
         }
       }
 
@@ -390,11 +365,11 @@ export namespace PublicPages {
         /** No authentication. */
         export namespace Get {
           export interface RequestParams {
-            readonly publicPageId: string
-            readonly cardId: string
+            readonly publicPageId: Id
+            readonly cardId: Id
           }
           export interface ResponseBody {
-            readonly card: Entity.Card
+            readonly card: Model.Card
           }
         }
       }

@@ -1,13 +1,15 @@
-import { Base, Type } from '../types'
+import { Id } from '@zettelooo/commons'
+import { Base } from '../Base'
+import { Type } from '../Type'
 
 export interface Page extends Base {
   readonly type: Type.Page
-  readonly ownerUserId: string
+  readonly ownerUserId: Id
   readonly name: string
   readonly description: string
   readonly iconEmoji: string
   readonly color: string
-  readonly avatarFileId: string | null
+  readonly avatarFileId: Id | null
   readonly view: Page.View
   readonly public: boolean
 }

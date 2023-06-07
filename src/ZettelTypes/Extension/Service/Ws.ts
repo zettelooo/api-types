@@ -1,4 +1,4 @@
-import { Entity } from '../Entity'
+import { Model } from '../Model'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {
@@ -14,14 +14,14 @@ export namespace GetUpdates {
     }
   }
 
-  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any, BD = any> = {
+  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any> = {
     [Response.Type.Started]: {
       readonly type: Response.Type.Started
       readonly registrationKey: string
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation
-      readonly mutation: Response.Mutation<PD, CD, BD>
+      readonly mutation: Response.Mutation<PD, CD>
     }
   }[T]
 
@@ -31,28 +31,28 @@ export namespace GetUpdates {
       Mutation = 'MUTATION',
     }
 
-    export type Mutation<PD = any, CD = any, BD = any> =
+    export type Mutation<PD = any, CD = any> =
       | {
           readonly type: 'user'
-          readonly newUser: Entity.User
-          readonly oldUser?: Entity.User
+          readonly newUser: Model.User
+          readonly oldUser?: Model.User
         }
       | {
           readonly type: 'page'
-          readonly newPage: Entity.Page<PD>
-          readonly oldPage?: Entity.Page<PD>
+          readonly newPage: Model.Page<PD>
+          readonly oldPage?: Model.Page<PD>
         }
       | {
           readonly type: 'page member'
-          readonly newPageMember: Entity.PageMember
-          readonly oldPageMember?: Entity.PageMember
-          readonly page: Entity.Page<PD>
+          readonly newPageMember: Model.PageMember
+          readonly oldPageMember?: Model.PageMember
+          readonly page: Model.Page<PD>
         }
       | {
           readonly type: 'card'
-          readonly newCard: Entity.Card<CD, BD>
-          readonly oldCard?: Entity.Card<CD, BD>
-          readonly page: Entity.Page<PD>
+          readonly newCard: Model.Card<CD>
+          readonly oldCard?: Model.Card<CD>
+          readonly page: Model.Page<PD>
         }
   }
 }
