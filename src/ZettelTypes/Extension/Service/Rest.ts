@@ -128,18 +128,3 @@ export namespace EditCard {
   }
   export interface Response {}
 }
-
-export namespace AddBadge {
-  export interface Request {
-    readonly badge: {
-      readonly userId: Id
-      // For now only this badge action type is needed, we may improve this later:
-      readonly mentionInCard: {
-        readonly userId: Id
-        readonly cardId: Id
-      }
-    }
-    readonly senderRegistrationKey?: string
-  }
-  export interface Response {}
-}
