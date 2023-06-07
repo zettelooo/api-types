@@ -297,7 +297,9 @@ export namespace Cards {
                 readonly text: string
               }
             | {
-                readonly blocks: readonly (Omit<Model.Block, 'id'> & { readonly id?: string })[]
+                readonly blocks: readonly ({
+                  [T in Model.Block.Type]: Omit<Model.Block<T>, 'id'>
+                }[Model.Block.Type] & { readonly id?: string })[]
               }
           ) &
           Partial<Pick<Model.Card, 'color' | 'sequence'>>
@@ -334,7 +336,9 @@ export namespace Cards {
                     readonly text: string
                   }
                 | {
-                    readonly blocks: readonly (Omit<Model.Block, 'id'> & { readonly id?: string })[]
+                    readonly blocks: readonly ({
+                      [T in Model.Block.Type]: Omit<Model.Block<T>, 'id'>
+                    }[Model.Block.Type] & { readonly id?: string })[]
                   }
               )
           >
