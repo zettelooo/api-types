@@ -24,7 +24,7 @@ export type Request<T extends Request.Type = Request.Type> = {
     | {
         readonly unsubscribeAll?: false
         readonly newSubscriptions?: undefined
-        readonly allUserRelatedEntities?: boolean
+        readonly allUserRelatedModels?: boolean
         readonly account?: boolean
         readonly addUserIds?: readonly Id[]
         readonly removeUserIds?: readonly Id[]
@@ -90,7 +90,7 @@ export namespace Response {
 }
 
 export interface Subscriptions {
-  readonly allUserRelatedEntities: boolean
+  readonly allUserRelatedModels: boolean
   readonly account: boolean
   readonly userIds: readonly Id[]
   readonly pageIds: readonly Id[]
