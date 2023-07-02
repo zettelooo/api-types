@@ -1,2 +1,2 @@
-export * from './Personal'
-export * from './Extension'
+export * from './Model'
+export * from './Service'

@@ -7,6 +7,6 @@ export interface User extends Base {
   readonly name: string
   readonly userName: string
   readonly email: string
-  readonly color: string
   readonly avatarFileId: Id | null
+  readonly color: string
 }

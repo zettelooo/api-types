@@ -1,4 +1,5 @@
 import { Model } from '../Model'
+import { Data } from './Service'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {
@@ -14,14 +15,14 @@ export namespace GetUpdates {
     }
   }
 
-  export type Response<T extends Response.Type = Response.Type, PD = any, CD = any> = {
+  export type Response<T extends Response.Type = Response.Type, D extends Data = Data.Default> = {
     [Response.Type.Started]: {
       readonly type: Response.Type.Started
       readonly registrationKey: string
     }
     [Response.Type.Mutation]: {
       readonly type: Response.Type.Mutation
-      readonly mutation: Response.Mutation<PD, CD>
+      readonly mutation: Response.Mutation<D>
     }
   }[T]
 
@@ -31,7 +32,7 @@ export namespace GetUpdates {
       Mutation = 'MUTATION',
     }
 
-    export type Mutation<PD = any, CD = any> =
+    export type Mutation<D extends Data = Data.Default> =
       | {
           readonly type: 'user'
           readonly newUser: Model.User
@@ -39,20 +40,14 @@ export namespace GetUpdates {
         }
       | {
           readonly type: 'page'
-          readonly newPage: Model.Page<PD>
-          readonly oldPage?: Model.Page<PD>
-        }
-      | {
-          readonly type: 'page member'
-          readonly newPageMember: Model.PageMember
-          readonly oldPageMember?: Model.PageMember
-          readonly page: Model.Page<PD>
+          readonly newPage: Model.Page<D['pagePrivate']>
+          readonly oldPage?: Model.Page<D['pagePrivate']>
         }
       | {
           readonly type: 'card'
-          readonly newCard: Model.Card<CD>
-          readonly oldCard?: Model.Card<CD>
-          readonly page: Model.Page<PD>
+          readonly newCard: Model.Card<D['cardPublic'], D['cardPrivate']>
+          readonly oldCard?: Model.Card<D['cardPublic'], D['cardPrivate']>
+          readonly page: Model.Page<D['pagePrivate']>
         }
   }
 }
