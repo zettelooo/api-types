@@ -1,6 +1,6 @@
 import { Id } from '@zettelooo/commons'
 import { Model } from '../Model'
-import { Data } from './types/Data'
+import { Data } from '../Data'
 
 export namespace GetUsers {
   export interface Request {

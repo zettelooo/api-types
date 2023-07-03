@@ -1,5 +1,5 @@
+import { Data } from '../Data'
 import { Model } from '../Model'
-import { Data } from './Service'
 
 export namespace GetUpdates {
   export type Request<T extends Request.Type = Request.Type> = {
