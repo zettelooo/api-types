@@ -21,31 +21,6 @@ export namespace GetPages {
   }
 }
 
-export namespace AddPage {
-  export interface Request<D extends Data = Data.Default> {
-    readonly page: Readonly<
-      Pick<Model.Page<D['pagePrivate']>, 'name'> &
-        Partial<
-          Pick<
-            Model.Page<D['pagePrivate']>,
-            | 'description'
-            | 'iconEmoji'
-            | 'avatarFileId'
-            | 'color'
-            | 'memberUserIds'
-            | 'public'
-            | 'hasExtensionInstalled'
-            | 'privateData'
-          >
-        >
-    >
-    readonly senderRegistrationKey?: string
-  }
-  export interface Response {
-    readonly pageId: Id
-  }
-}
-
 export namespace EditPage {
   export interface Request<D extends Data = Data.Default> {
     readonly pageId: Id
