@@ -23,6 +23,7 @@ export namespace GetPages {
 
 export namespace EditPage {
   export interface Request<D extends Data = Data.Default> {
+    readonly accountId?: Id
     readonly pageId: Id
     readonly updates: Readonly<
       Partial<
@@ -57,6 +58,7 @@ export namespace GetCards {
 
 export namespace AddCard {
   export interface Request<D extends Data = Data.Default> {
+    readonly accountId?: Id
     readonly card: Readonly<
       Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'pageId'> &
         Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'sequence' | 'publicData' | 'privateData'>>
@@ -70,6 +72,7 @@ export namespace AddCard {
 
 export namespace EditCard {
   export interface Request<D extends Data = Data.Default> {
+    readonly accountId?: Id
     readonly cardId: Id
     readonly updates: Readonly<
       Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'pageId' | 'sequence' | 'publicData' | 'privateData'>>
