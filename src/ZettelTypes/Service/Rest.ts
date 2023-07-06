@@ -75,7 +75,7 @@ export namespace EditCard {
     readonly accountId?: Id
     readonly cardId: Id
     readonly updates: Readonly<
-      Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'pageId' | 'sequence' | 'publicData' | 'privateData'>>
+      Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'sequence' | 'publicData' | 'privateData'>>
     >
     readonly senderRegistrationKey?: string
   }
