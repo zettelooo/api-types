@@ -29,15 +29,7 @@ export namespace EditPage {
       Partial<
         Pick<
           Model.Page<D['pagePrivate']>,
-          | 'name'
-          | 'description'
-          | 'iconEmoji'
-          | 'avatarFileId'
-          | 'color'
-          | 'memberUserIds'
-          | 'public'
-          | 'hasExtensionInstalled'
-          | 'privateData'
+          'name' | 'description' | 'iconEmoji' | 'avatarFileId' | 'color' | 'memberUserIds' | 'public' | 'privateData'
         >
       >
     >
