@@ -17,7 +17,7 @@ export namespace GetPages {
     readonly withExtensionInstalled?: boolean
   }
   export interface Response<D extends Data = Data.Default> {
-    readonly pages: readonly Model.Page<D['pagePrivate']>[]
+    readonly pages: readonly Model.Page<D['page']>[]
   }
 }
 
@@ -28,8 +28,8 @@ export namespace EditPage {
     readonly updates: Readonly<
       Partial<
         Pick<
-          Model.Page<D['pagePrivate']>,
-          'name' | 'description' | 'iconEmoji' | 'avatarFileId' | 'color' | 'memberUserIds' | 'public' | 'privateData'
+          Model.Page<D['page']>,
+          'name' | 'description' | 'iconEmoji' | 'avatarFileId' | 'color' | 'memberUserIds' | 'public' | 'data'
         >
       >
     >
@@ -44,7 +44,7 @@ export namespace GetCards {
     readonly pageIds?: readonly string[]
   }
   export interface Response<D extends Data = Data.Default> {
-    readonly cards: readonly Model.Card<D['cardPublic'], D['cardPrivate']>[]
+    readonly cards: readonly Model.Card<D['card']>[]
   }
 }
 
@@ -52,8 +52,7 @@ export namespace AddCard {
   export interface Request<D extends Data = Data.Default> {
     readonly accountId?: Id
     readonly card: Readonly<
-      Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'pageId'> &
-        Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'sequence' | 'publicData' | 'privateData'>>
+      Pick<Model.Card<D['card']>, 'pageId'> & Partial<Pick<Model.Card<D['card']>, 'sequence' | 'data'>>
     >
     readonly senderRegistrationKey?: string
   }
@@ -66,9 +65,7 @@ export namespace EditCard {
   export interface Request<D extends Data = Data.Default> {
     readonly accountId?: Id
     readonly cardId: Id
-    readonly updates: Readonly<
-      Partial<Pick<Model.Card<D['cardPublic'], D['cardPrivate']>, 'sequence' | 'publicData' | 'privateData'>>
-    >
+    readonly updates: Readonly<Partial<Pick<Model.Card<D['card']>, 'sequence' | 'data'>>>
     readonly senderRegistrationKey?: string
   }
   export interface Response {}

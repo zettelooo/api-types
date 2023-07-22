@@ -40,14 +40,14 @@ export namespace GetUpdates {
         }
       | {
           readonly type: 'page'
-          readonly newPage: Model.Page<D['pagePrivate']>
-          readonly oldPage?: Model.Page<D['pagePrivate']>
+          readonly newPage: Model.Page<D['page']>
+          readonly oldPage?: Model.Page<D['page']>
         }
       | {
           readonly type: 'card'
-          readonly newCard: Model.Card<D['cardPublic'], D['cardPrivate']>
-          readonly oldCard?: Model.Card<D['cardPublic'], D['cardPrivate']>
-          readonly page: Model.Page<D['pagePrivate']>
+          readonly newCard: Model.Card<D['card']>
+          readonly oldCard?: Model.Card<D['card']>
+          readonly page: Model.Page<D['page']>
         }
   }
 }

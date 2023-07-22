@@ -1,7 +1,6 @@
 export interface Data {
-  readonly pagePrivate: any
-  readonly cardPublic: any
-  readonly cardPrivate: any
+  readonly page: any
+  readonly card: any
 }
 
 export namespace Data {
@@ -9,13 +8,11 @@ export namespace Data {
 
   export type Builder<
     D extends {
-      pagePrivate?: any
-      cardPublic?: any
-      cardPrivate?: any
+      page?: any
+      card?: any
     }
   > = {
-    readonly pagePrivate: D['pagePrivate'] | undefined
-    readonly cardPublic: D['cardPublic'] | undefined
-    readonly cardPrivate: D['cardPrivate'] | undefined
+    readonly page: D['page'] | undefined
+    readonly card: D['card'] | undefined
   }
 }
